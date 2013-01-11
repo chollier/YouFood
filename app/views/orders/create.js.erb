@@ -1,0 +1,3 @@
+<% publish_to "/orders/new" do %>
+	$('#orders-list').append("<%= j render(@order) %>")
+<% end %>

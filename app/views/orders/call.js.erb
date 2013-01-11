@@ -1,0 +1,3 @@
+<% publish_to "/zone/#{@table.room_zone.id}" do %>
+	$("#notifications").append("<div class=\"alert alert-error\"><a class=\"close\" data-dismiss=\"alert\" href=\"#\">×</a>Table <strong><%= @table.name %></strong> is calling.</div>");
+<% end %>

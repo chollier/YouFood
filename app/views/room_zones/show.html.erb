@@ -1,0 +1,26 @@
+
+<ul class="breadcrumb">
+  <li>
+    <a href="/">Home</a> <span class="divider">/</span>
+  </li>
+  <li>
+    <%= link_to @room_zone.dinning_room.name, @room_zone.dinning_room %> <span class="divider">/</span>
+  </li>
+  <li class="active"><%= @room_zone.name %></li>
+</ul>
+<br />
+	<div class="span10 offset1">
+		<ul class="thumbnails">
+		<% @room_zone.tables.each do |table| %>
+			<li class="span2">
+				<div class="thumbnail">
+					<%= link_to image_tag("http://placehold.it/160x120&text=#{table.name}"), dinning_room_room_zone_table_url(@room_zone.dinning_room, @room_zone, table) %>
+					<div class="caption">
+						<h5><%= table.name %></h5>
+					</div>
+				</div>
+			</li>
+		<% end -%>
+		</ul>
+</div>
+

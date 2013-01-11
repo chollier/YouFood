@@ -1,0 +1,19 @@
+<% publish_to "/orders/ready" do %>
+	$("#orders_dishes_<%= @orders_dish.id %>_ready").addClass('disabled');
+	
+	<% if @delete_group == true %>
+		$("#order-<%= @orders_dish.order.id %>-dishes-thead, #order-<%= @orders_dish.order.id %>-dishes-tbody").fadeOut('slow');
+	<% end %>
+	
+<% end %>
+
+<% if @delete_group == true %>
+	
+    <% publish_to "/zone/#{@orders_dish.order.table.room_zone.id}" do %>
+		$("#notifications").append("<div class=\"alert alert-success\"><a class=\"close\" data-dismiss=\"alert\" href=\"#\">×</a><strong>Dishes</strong> are ready for table <strong><%= @orders_dish.order.table.name %></strong></div>");
+	<% end %>
+<% end %>
+
+<% publish_to "/orders/track/#{@orders_dish.order.id}" do %>
+	$("#dishes-<%= @orders_dish.id %>").addClass('label-success').html("Ready");
+<% end %>

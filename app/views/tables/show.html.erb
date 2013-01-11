@@ -1,0 +1,21 @@
+<div class="hero-unit">
+	<h1>Welcome</h1>
+	<p>This week, we feature a special Menu : <strong><%= FoodMenu.active.last.name %></strong></p>
+	<br />
+	<p>You can right now start to order thanks to our interactive system or call for a waiter.</p>
+		<ul class="thumbnails"id="table-welcome">
+			<li class="span4">
+				<button>
+				<%= link_to image_tag("http://placehold.it/360x268&text=Order"), new_dinning_room_room_zone_table_order_url(@table.room_zone.dinning_room, @table.room_zone, @table), :class => 'thumbnail' %>
+				</button>
+			</li>
+			<li class="span4">
+				<%= form_tag call_order_url(@table.id), remote: true do %>
+					<button type="submit">
+					<%= image_tag "http://placehold.it/360x268&text=Call", :class => 'thumbnail'%>
+					</button>
+				<% end %>
+			</li>
+		</ul>
+</div>
+

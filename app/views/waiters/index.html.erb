@@ -1,0 +1,14 @@
+<table class="table">
+	<thead>
+		<tr><th>Nom</th></tr>
+	</thead>
+	<tbody>
+		<tr>
+		<% @waiters.each do |waiter| %>
+			<td><%= link_to waiter.name, waiter %></td>
+		<% end %>
+		</tr>
+		
+	</tbody>
+	
+</table>

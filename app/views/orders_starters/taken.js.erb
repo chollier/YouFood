@@ -1,0 +1,7 @@
+<% publish_to "/orders/taken" do %>
+	$("#orders_starters_<%= @orders_starter.id %>_taken").addClass('disabled');	
+<% end %>
+
+<% publish_to "/orders/track/#{@orders_starter.order.id}" do %>
+	$("#starters-<%= @orders_starter.id %>").addClass('label-info').html("Pending");
+<% end %>

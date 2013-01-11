@@ -1,0 +1,43 @@
+<%- model_class = @order.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+                                 :default => "New #{model_class.model_name.human}") %></h1>
+</div>
+<%# render :partial => 'form' %>
+
+<div class="row">
+
+<% ['starters', 'dishes', 'deserts'].each do |x| %>
+
+<div id="<%= x %>" class="span12">
+	      <h2><%= x %></h2>
+	      <ul class="thumbnails">
+	
+		<% for z in @food_menu.send(x) %>
+	        <li class="span3 <%= "#{x}-#{z.id}" %>">
+	          <div class="thumbnail">
+	            <%= image_tag z.image.url(:medium) %>
+	            <div class="caption">
+	              <h5><%= z.name %></h5>
+	              <p><%= z.description %></p>
+				  <input type="hidden" name="order[orders_<%= x %>_attributes][][<%= x.singularize %>_id]" value="<%= z.id %>">
+	
+	              <p><div class="input-prepend food-pricing"><button class="btn btn-primary add-food" type="button">+</button><button class="btn rem-food" type="button">-</button><input class="span1 uneditable-input food-qty" name="order[orders_<%= x %>_attributes][][quantity]" size="8" type="text" value="0" data-food="<%= x %>" data-id="<%= z.id %>"><span class="price badge"><%= z.price%>&euro;</span></p>
+	            </div></div>
+	          </div>
+	        </li>
+	        <%- end -%>
+	      </ul>
+	
+</div>
+
+<% end %>
+
+<div id="resume" class="span12">
+	<h2>Resume</h2>
+	<%= form_tag dinning_room_room_zone_table_orders_url do |f| %>
+		<ul class="thumbnails">
+		</ul>
+		<button type="submit" class="btn btn-primary">Checkout</button>
+	<% end %>
+</div>

@@ -1,0 +1,48 @@
+<table class="table table-striped ">
+<thead>
+	<tr>
+		<th>Type</th>
+		<th>Name</th>
+		<th>Quantity</th>
+		<th>State</th>
+	</tr>
+<thead>
+
+<% ['starters', 'dishes', 'deserts'].each do |course| %>
+
+	<thead>
+	<tr>
+		<th><%= course.capitalize %></th>
+		<th colspan="3"></th>
+	</tr>
+
+	</thead>
+	<tbody>
+	<% order.send("orders_#{course}").each do |ox| %>
+		<tr>
+			<td>
+			<td><%= ox.send(course.singularize).name %></td>
+			<td><%= ox.quantity %></td>
+			<td class="order-state"><span class="label" id="<%= "#{course}-#{ox.id}" %>">Waiting</span></td>
+		</tr>
+	<% end -%>
+	</tbody>
+
+<% end %>
+
+	<tfoot>
+		<tr>
+			<th>Total</th>
+			<td colspan="3" style="text-align:right;"><strong><%= @order.price %>&euro;</strong>&nbsp;<form style="float: right;" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+			">
+			<input type="image" style="width: auto;" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+			<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+			</form>
+			</td>
+		</tr>
+	</tfoot>
+
+</table>
+

@@ -1,0 +1,15 @@
+<div class="hero-unit">
+	<h1>Thanks !</h1>
+	<p>Your order's cooking is in progress, you can track its status here (it will auto-update)</p>
+	<hr />
+	<%= render :partial => 'order_show', :locals => { :order => @order } %>
+	
+</div>
+
+<% publish_to "/orders/new" do %>
+	$('#orders-list').append("<%= j render(@order) %>");
+<% end %>
+
+<% publish_to "/zone/#{@order.table.room_zone.id}" do %>
+	$("#notifications").append("<div class=\"alert alert-warning\"><a class=\"close\" data-dismiss=\"alert\" href=\"#\">×</a>Table <strong><%= @order.table.name %></strong> has made an order.</div>");
+<% end %>

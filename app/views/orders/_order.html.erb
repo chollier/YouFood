@@ -1,0 +1,36 @@
+<h3>Order #<%= order.id %></h3>
+
+<table class="table table-striped table-bordered table-condensed">
+<thead>
+	<tr>
+		<th>Type</th>
+		<th>Name</th>
+		<th>Quantity</th>
+		<th>State</th>
+	</tr>
+<thead>
+
+<% ['starters', 'dishes', 'deserts'].each do |course| %>
+
+	<thead id="order-<%= order.id %>-<%=  course %>-thead">
+	<tr>
+		<th><%= course.capitalize %></th>
+		<th colspan="3"></th>
+	</tr>
+
+	</thead>
+	<tbody  id="order-<%= order.id %>-<%=  course %>-tbody">
+	<% order.send("orders_#{course}").each do |ox| %>
+		<tr>
+			<td>
+			<td><%= ox.send(course.singularize).name %></td>
+			<td><%= ox.quantity %></td>
+			<td class="order-state"><%= form_tag "/orders/#{order.id}/orders_#{course}/#{ox.id}/ready", remote: true, html: {:class => 'form-inline'} do %><input type="submit" class="btn btn-success btn-mini <%= 'disabled' if ox.ready %>" id="orders_<%= course %>_<%= ox.id %>_ready" value="Ready" /><% end -%><%= form_tag "/orders/#{order.id}/orders_#{course}/#{ox.id}/taken", remote: true, html: {:class => 'form-inline'} do %><input type="submit" class="btn btn-primary btn-mini <%= 'disabled' if ox.taken %>" id="orders_<%= course %>_<%= ox.id %>_taken" value="Taken" /><% end -%></td>
+		</tr>
+	<% end -%>
+	</tbody>
+
+<% end %>
+
+</table>
+

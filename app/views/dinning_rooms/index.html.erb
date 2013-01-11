@@ -1,0 +1,22 @@
+<ul class="breadcrumb">
+  <li>
+    <a href="active">Home</a> 
+  </li>
+</ul>
+	<div class="span10 offset1">
+		<ul class="thumbnails">
+		<% @dinning_rooms.each do |dinning_room| %>
+			<li class="span2">
+				<div class="thumbnail">
+					<%= link_to image_tag("http://placehold.it/160x120&text=#{dinning_room.name}"), dinning_room %>
+					<div class="caption">
+						<h5><%= dinning_room.name %></h5>
+						<p><%= dinning_room.address %><p>
+						<p><%= dinning_room.zipcode %> <%= dinning_room.city %></p>
+					</div>
+				</div>
+			</li>
+		<% end -%>
+		</ul>
+	</div>
+
